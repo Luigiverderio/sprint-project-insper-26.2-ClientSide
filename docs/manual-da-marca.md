@@ -1,6 +1,6 @@
 # Manual da marca — white label
 
-Versão 0.1 · novembro de 2026 · tokens em [`design-tokens/tokens.css`](../design-tokens/tokens.css)
+Versão 0.2 · novembro de 2026 · tokens em [`design-tokens/tokens.css`](../design-tokens/tokens.css)
 
 Este manual define como o produto de monitoramento de ônibus aparece para qualquer cliente.
 Ele parte do que o sistema atual já usa (relatórios Quarto e app Shiny do repositório
@@ -16,7 +16,7 @@ qualquer tela e para qualquer cliente.
    primária (cabeçalho, botões, links). As cores de status, sentidos, séries e metas são
    fixas. "Não realizada" é vermelho em todo cliente.
 2. **Uma cor, um significado.** Uma cor de dado nunca é reaproveitada para outra coisa na
-   mesma tela (ver §4.6, conflitos herdados).
+   mesma tela (ver §4.6, decisões sobre os conflitos herdados).
 3. **Cor nunca sozinha.** Todo status também tem rótulo, e nas grades, ícone ou tooltip.
    Verde e vermelho se confundem para cerca de 8% dos homens.
 4. **O número vem com a regra.** Todo indicador mostra a tolerância e a referência ao lado
@@ -109,15 +109,16 @@ diferença. Consolidamos em 11:
 ### 4.2 Status da saída programada (fixo)
 
 É a paleta mais importante do produto. Ordem, rótulo e cor vêm de `STATUS` em
-`R/11_relatorio_linha.R`. A ordem abaixo é a ordem de legenda e de empilhamento em todo
-lugar.
+`R/11_relatorio_linha.R`, com uma troca decidida pelo time: "quase completa" passou do
+azul para o verde claro (C1). A ordem abaixo é a ordem de legenda e de empilhamento em
+todo lugar.
 
 | # | Código (`audit_status`) | Rótulo | Grupo | Preenchimento | Texto sobre ele | Texto sobre branco |
 |---|---|---|---|---|---|---|
 | 1 | `realizada_no_horario` | No horário | cumprida | `#0ca30c` | tinta (5,9:1) | `#0a890a` |
 | 2 | `realizada_com_atraso` | Atrasada | fora da tolerância | `#fab219` | tinta (10,7:1) | `#9f6d03` |
 | 3 | `realizada_antecipadamente` | Antecipada | fora da tolerância | `#ec835a` | tinta (7,5:1) | `#cd4b18` |
-| 4 | `viagem_quase_completa` | Quase completa (≥95%) | quase completa | `#3f7fb5` | tinta (4,6:1) | `#3d7baf` |
+| 4 | `viagem_quase_completa` | Quase completa (≥95%) | quase completa | `#7cc97c` | tinta (9,8:1) | `#378637` |
 | 5 | `partida_sem_viagem_completa` | Saiu, não completou | não cumprida | `#8f2a2a` | branco (8,3:1) | `#8f2a2a` |
 | 6 | `possivelmente_nao_realizada` | Não realizada | não cumprida | `#d03b3b` | branco (4,8:1) | `#d03b3b` |
 | 7 | `inconclusiva` | Inconclusiva | inconclusiva | `#9a998f` | tinta (6,9:1) | `#78776c` |
@@ -129,7 +130,12 @@ lugar.
 - **Preenchimento** (célula da grade, barra, marcador): use a coluna "Preenchimento".
 - **Badge** (fundo colorido com texto): preenchimento + "Texto sobre ele".
 - **Texto colorido sobre branco** (ex.: valor numa tabela): use "Texto sobre branco". As
-  cores 1 a 4 e 7 originais reprovam como texto pequeno.
+  cores 1 a 4 e 7 originais reprovam como texto pequeno. Os textos de "no horário"
+  (`#0a890a`) e "quase completa" (`#378637`) são verdes parecidos: como texto, sempre
+  acompanhados do rótulo.
+- **Verde e verde claro lado a lado** (grade): a diferença é de claridade (1,7:1 entre
+  os dois preenchimentos). É o que se quer, porque "quase completa" é quase cumprida, mas
+  a célula sempre leva tooltip e a legenda funciona como filtro.
 - **Redundância obrigatória**: rótulo visível na legenda; tooltip em cada célula da grade;
   em badges, ícone opcional (✓ no horário, ◷ atrasada/antecipada, ◐ quase completa,
   ✕ não realizada/não completou, ? inconclusiva, — sem avaliação).
@@ -139,7 +145,7 @@ lugar.
 | Código (`trajectory_status`) | Rótulo | Cor |
 |---|---|---|
 | `viagem_confirmada` | Viagem confirmada | `#0ca30c` |
-| `viagem_provavel` | Viagem provável | `#7cc97c` |
+| `viagem_provavel` | Viagem provável | `#7cc97c` (mesma cor de "quase completa": as duas são "quase certo") |
 | `trajetoria_parcial` | Trajetória parcial | `#8f2a2a` |
 | `observacao_inconclusiva` | Observação inconclusiva | `#9a998f` |
 
@@ -154,9 +160,15 @@ lugar.
 | `--dado-meta` | `#0b0b0b` | linha de referência, **tracejada** 1 px, com rótulo |
 | `--dado-sem-dado` | `#e1e0d9` | período com registros, sem evento |
 | `--dado-lacuna-gps` | `#d03b3b` | lacuna de GPS > 10 min (preenchimento 35%), registro descartado (✕) |
-| `--dado-fora-de-foco` | `#8a897f` | veículos e traçados não destacados (só elemento gráfico, não texto) |
+| `--dado-cursor-tempo` | `#0b0b0b` | cursor "agora" nos diagramas, com etiqueta da hora em branco sobre tinta (C2) |
+| `--dado-fora-de-foco` | `#8a897f` | veículos não destacados (só elemento gráfico, não texto) |
 | `--dado-parada` / `--dado-terminal` | `#5f5e57` / `#0b0b0b` | contorno das paradas (raio 3) e terminais (raio 7), miolo branco |
-| `--dado-cat-1` … `--dado-cat-8` | `#2a78d6` `#eb6834` `#1baf7a` `#eda100` `#7d4fd6` `#d6457a` `#4f8a10` `#00838f` | veículos destacados, nessa ordem |
+| `--dado-veiculo-1` … `--dado-veiculo-6` | `#1baf7a` `#eda100` `#7d4fd6` `#d6457a` `#4f8a10` `#00838f` | veículos destacados, nessa ordem (C3) |
+
+Regra dos veículos destacados (C3): os traçados mantêm as cores dos sentidos; os veículos
+**não** destacados ficam em `--dado-fora-de-foco`; os destacados usam `--dado-veiculo-1`
+a `-6`, que deixam de fora o azul e o laranja dos sentidos. Do 7º destaque em diante, o
+veículo volta ao cinza e é identificado só pelo rótulo (prefixo) ao lado do marcador.
 
 Regra da série única: **não use a cor da marca em gráficos.** Se o cliente for vermelho, um
 gráfico de IPP vermelho seria lido como "ruim".
@@ -169,20 +181,24 @@ gráfico de IPP vermelho seria lido como "ruim".
 - Valor que pede atenção numa tabela (ex.: não realizadas > 0): `--cor-texto-alerta`
   `#b02a2a`, peso 600.
 
-### 4.6 Conflitos herdados do sistema atual (decisões pendentes)
+### 4.6 Conflitos herdados do sistema atual
 
-Foram encontrados no código atual. As propostas abaixo precisam do aval do cliente antes
-de mudar, porque os relatórios já circulam com essas cores.
+Encontrados no código atual. C1, C2 e C3 foram decididos pelo time em 18/11/2026. A
+mudança nos relatórios que já circulam deve ser comunicada ao cliente junto com a nova
+versão.
 
-| # | Conflito | Onde | Proposta |
+| # | Conflito | Onde | Decisão |
 |---|---|---|---|
-| C1 | Três azuis próximos com significados diferentes: "quase completa" `#3f7fb5`, sentido 0 `#2a78d6`, série única `#3b6ea5` | relatório, app, gráficos | manter o sentido 0; trocar "quase completa" por um tom fora do eixo azul (ex.: turquesa escuro). Testar com simulador de daltonismo |
-| C2 | O cursor de tempo ("agora") usa o mesmo vermelho de "não realizada" `#d03b3b` | diagrama espaço-tempo e linha do tempo do app | cursor em `--dado-cursor-tempo` (tinta), já aplicado nos tokens |
-| C3 | As duas primeiras cores de destaque de veículo são idênticas às dos sentidos | mapa do app | ao destacar veículos, pintar os não destacados com `--dado-fora-de-foco` e começar os destaques em `--dado-cat-3`, ou desligar a cor por sentido |
+| C1 | Três azuis próximos com significados diferentes: "quase completa" `#3f7fb5`, sentido 0 `#2a78d6`, série única `#3b6ea5` | relatório, app, gráficos | **decidido:** "quase completa" passa a verde claro `#7cc97c`, a mesma cor de viagem provável |
+| C2 | O cursor de tempo ("agora") usa o mesmo vermelho de "não realizada" `#d03b3b` | diagrama espaço-tempo e linha do tempo do app | **decidido:** cursor em tinta `#0b0b0b` (`--dado-cursor-tempo`) |
+| C3 | As duas primeiras cores de destaque de veículo são idênticas às dos sentidos | mapa do app | **decidido:** não destacados em cinza; destaques usam `--dado-veiculo-1` a `-6`, sem as cores dos sentidos |
 | C4 | Verde `#0ca30c` e vermelho `#d03b3b` lado a lado na grade | grade de cumprimento | manter as cores e garantir o tooltip, a legenda-filtro e, em tela, o padrão de ícone no hover |
 | C5 | Percentual com ponto (`45.3%`) e milhar com ponto (`1.234`) no mesmo card | `pct()` em `relatorio_linha.qmd` | percentual com vírgula: `45,3%` (§7) |
 | C6 | Gráficos estáticos em `theme_minimal()` padrão do ggplot, com fonte e cinzas diferentes do relatório | `R/10_exportacao.R` | um tema único de gráfico com os tokens (§8) |
 | C7 | Texto auxiliar em `#8a897f` (3,5:1, reprova AA) | subtítulos de card, eixos secundários | `--cor-texto-terciario` `#77766c` |
+
+Outras decisões de 18/11/2026: o peso dos números nos cards continua 600 (§5), e a cor
+primária do tema padrão é o azul petróleo `#1f4e79` (§2.1).
 
 ---
 
@@ -321,3 +337,7 @@ Espaçamento sempre na escala de 4 px (`--esp-1` … `--esp-8`).
 
 - **0.1** (18/11/2026): primeira versão, extraída do app Shiny e dos relatórios Quarto do
   sistema atual. Conflitos C1–C7 abertos.
+- **0.2** (18/11/2026): decisões do time. "Quase completa" passa a verde claro `#7cc97c`
+  (C1); cursor de tempo em tinta (C2); veículos destacados sem as cores dos sentidos,
+  com os tokens `--dado-veiculo-1…6` no lugar de `--dado-cat-1…8` (C3); peso 600 nos
+  números e primária padrão `#1f4e79` confirmados.

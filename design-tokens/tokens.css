@@ -53,7 +53,7 @@
   --status-no-horario: #0ca30c;        --status-no-horario-sobre: #0b0b0b;    --status-no-horario-texto: #0a890a;
   --status-atrasada: #fab219;          --status-atrasada-sobre: #0b0b0b;      --status-atrasada-texto: #9f6d03;
   --status-antecipada: #ec835a;        --status-antecipada-sobre: #0b0b0b;    --status-antecipada-texto: #cd4b18;
-  --status-quase-completa: #3f7fb5;    --status-quase-completa-sobre: #0b0b0b; --status-quase-completa-texto: #3d7baf;
+  --status-quase-completa: #7cc97c;    --status-quase-completa-sobre: #0b0b0b; --status-quase-completa-texto: #378637; /* era #3f7fb5 (C1) */
   --status-saiu-nao-completou: #8f2a2a; --status-saiu-nao-completou-sobre: #ffffff; --status-saiu-nao-completou-texto: #8f2a2a;
   --status-nao-realizada: #d03b3b;     --status-nao-realizada-sobre: #ffffff; --status-nao-realizada-texto: #d03b3b;
   --status-inconclusiva: #9a998f;      --status-inconclusiva-sobre: #0b0b0b;  --status-inconclusiva-texto: #78776c;
@@ -74,19 +74,19 @@
   --dado-meta: var(--p-neutro-950);     /* linha de referência (ex.: SPTrans 97%), tracejada */
   --dado-sem-dado: var(--p-neutro-200); /* período com registros sem evento / lacuna neutra */
   --dado-lacuna-gps: #d03b3b;           /* lacuna de GPS > 10 min, registros descartados */
-  --dado-cursor-tempo: var(--p-neutro-950);  /* proposta: era #d03b3b, colidia com "não realizada" */
-  --dado-fora-de-foco: #8a897f;         /* veículos/traçados não destacados (só elemento gráfico) */
+  --dado-cursor-tempo: var(--p-neutro-950);  /* era #d03b3b, colidia com "não realizada" (C2) */
+  --dado-fora-de-foco: #8a897f;         /* veículos não destacados (só elemento gráfico) */
   --dado-parada: var(--p-neutro-700);
   --dado-terminal: var(--p-neutro-950);
-  /* veículos destacados, na ordem de uso (categórica, 8 cores) */
-  --dado-cat-1: #2a78d6;
-  --dado-cat-2: #eb6834;
-  --dado-cat-3: #1baf7a;
-  --dado-cat-4: #eda100;
-  --dado-cat-5: #7d4fd6;
-  --dado-cat-6: #d6457a;
-  --dado-cat-7: #4f8a10;
-  --dado-cat-8: #00838f;
+  /* veículos destacados, na ordem de uso (6 cores; C3). Não incluem as cores dos
+     sentidos para não confundir veículo com sentido. Mais de 6: o 7º em diante
+     fica em --dado-fora-de-foco. */
+  --dado-veiculo-1: #1baf7a;
+  --dado-veiculo-2: #eda100;
+  --dado-veiculo-3: #7d4fd6;
+  --dado-veiculo-4: #d6457a;
+  --dado-veiculo-5: #4f8a10;
+  --dado-veiculo-6: #00838f;
 
   /* ---------- 2. Tipografia */
   --fonte-sans: var(--marca-fonte);
