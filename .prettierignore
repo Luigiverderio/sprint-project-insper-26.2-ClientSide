@@ -1,0 +1,9 @@
+dist
+coverage
+package-lock.json
+
+# Arquivos de regras e documentação mantidos à mão (não reformatar)
+*.md
+.agents
+.claude
+design-tokens

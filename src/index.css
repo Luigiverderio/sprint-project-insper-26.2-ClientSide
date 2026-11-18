@@ -1,0 +1,25 @@
+@import '../design-tokens/tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: var(--fonte-sans);
+  font-size: var(--fonte-16);
+  line-height: var(--altura-linha);
+}
+
+a {
+  color: var(--cor-interativa);
+}
+
+:focus-visible {
+  outline: 2px solid var(--cor-foco);
+  outline-offset: 2px;
+}
