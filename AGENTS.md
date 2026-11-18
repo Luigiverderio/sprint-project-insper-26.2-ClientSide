@@ -4,6 +4,7 @@ Regras para todo agente (Codex, Claude Code) e membro do time. Fonte única: reg
 
 ## Projeto
 - Frontend do projeto; o backend fica em https://github.com/Luigiverderio/sprint-project-insper-26.2.
+- Convenções e arquitetura do time (fonte: [ADR-001 do backend](https://github.com/Luigiverderio/sprint-project-insper-26.2/blob/develop/docs/adr-001.md)): a API usa o prefixo `/v1` e só lê dados já calculados, porque o processamento pesado roda no worker. Se este arquivo divergir do ADR, vale o ADR.
 - Stack: Vite + React 19 + TypeScript 6, React Router, React Query, Vitest + Testing Library, ESLint + Prettier.
 - Comandos: `npm ci` · `npm run dev` · `npm test` · `npm run lint` · `npm run format` · `npm run build`
 - **Verde** = `npm run lint`, `npm test`, `npm run build` e `npm run format:check` passando.
