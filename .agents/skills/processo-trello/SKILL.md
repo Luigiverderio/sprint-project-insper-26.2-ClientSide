@@ -7,13 +7,18 @@ description: Processo Scrum + Kanban do time no quadro Trello "Sprint 2ºSemestr
 
 Quadro: https://trello.com/b/qypssKqv/sprint-2semestre · sprint de 1 semana · a meta da sprint fica no topo do quadro e orienta a prioridade.
 
+## Papéis
+- PO: Vitor (vitoros1). Organiza e prioriza o Product Backlog e o Sprint Backlog e define o critério de aceite.
+- SM: Luigi (luigimv). Garante o processo (fluxo de branches, commits, card por mudança), vigia o WIP, conduz as cerimônias e remove impedimentos.
+- Dúvida de escopo ou prioridade → PO. Dúvida de processo ou bloqueio → SM.
+
 ## Colunas
 Product Backlog → Sprint Backlog → To - Do → Doing (WIP 4) → Revision (WIP 2) → Done.
 
 O WIP não está configurado no Trello: conte os cards antes de mover. Coluna cheia → não mova; reporte o gargalo.
 
 ## Card de tarefa
-- Título: `<id> – <descrição>`. `H<nn>` = história do documento de requisitos (H1–H32, ex.: `H22 – Mapa ao vivo dos ônibus`); `T<nn>` = tarefa técnica sem história (ex.: `T2 – Repositório do frontend com projeto React e testes`). O id liga card, branch (`feat/h22-...`) e commit (`Refs: H22`).
+- Título: `<id> – <descrição>`. `H<nn>` = história do documento de requisitos (H1–H32); `T<nn>` = tarefa técnica sem história. O id liga card, branch (`feat/h22-...`) e commit (`Refs: H22`).
 - Responsável: membro do card.
 - Etiquetas, uma de cada grupo:
   - tamanho: `P` (≤2h) · `M` (meio dia) · `G` (≥1 dia → quebrar em cards menores);
