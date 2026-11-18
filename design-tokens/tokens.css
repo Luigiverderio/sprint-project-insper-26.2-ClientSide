@@ -1,0 +1,137 @@
+/*
+ * Tokens de design — manual da marca white label (docs/manual-da-marca.md)
+ *
+ * Três camadas:
+ *   1. primitivos  (--p-*)      valores crus; não use direto nos componentes
+ *   2. semânticos  (--cor-*, --dado-*, --status-*, --fonte-*, --esp-*, --raio-*)
+ *   3. marca       (--marca-*)  única camada que o tema do cliente sobrescreve
+ *
+ * Regra de ouro: a marca veste a moldura (cabeçalho, botões, links, logo);
+ * os dados (status, sentidos, séries, metas) têm cores fixas para todo cliente.
+ */
+
+:root {
+  /* ---------- 1. Primitivos: neutros quentes (herdados do sistema atual, consolidados) */
+  --p-neutro-0: #ffffff;
+  --p-neutro-25: #fafaf7;   /* era #fafaf7 e #fbfbf9 */
+  --p-neutro-50: #f5f4f0;   /* era #f5f4f0 e #f7f6f2 */
+  --p-neutro-100: #ecebe6;  /* era #ecebe6 e #efeee9 */
+  --p-neutro-200: #e1e0d9;
+  --p-neutro-300: #d6d5cf;
+  --p-neutro-400: #c3c2b7;  /* era #c3c2b7 e #b5b4ad */
+  --p-neutro-500: #9a998f;
+  --p-neutro-600: #77766c;  /* novo: substitui #8a897f em texto (3,5:1 → 4,5:1) */
+  --p-neutro-700: #5f5e57;
+  --p-neutro-950: #0b0b0b;
+
+  /* ---------- 3. Marca (padrão neutro; cada cliente sobrescreve em temas/<cliente>.css) */
+  --marca-nome: "Monitoramento de Ônibus";
+  --marca-primaria: #1f4e79;
+  --marca-primaria-hover: #173b5c;
+  --marca-sobre-primaria: #ffffff;
+  --marca-destaque-suave: #e4eefb;     /* linha selecionada, foco suave */
+  --marca-fonte: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* ---------- 2. Semânticos: superfície e texto */
+  --cor-fundo: var(--p-neutro-0);
+  --cor-fundo-sutil: var(--p-neutro-25);     /* linhas zebradas, cards de indicador */
+  --cor-fundo-cabecalho: var(--p-neutro-50); /* cabeçalho de tabela */
+  --cor-fundo-nota: var(--p-neutro-50);
+  --cor-borda-sutil: var(--p-neutro-100);    /* entre linhas de tabela */
+  --cor-borda: var(--p-neutro-200);          /* cards, tabelas */
+  --cor-borda-forte: var(--p-neutro-400);    /* inputs, cabeçalho de tabela, hover */
+  --cor-texto: var(--p-neutro-950);
+  --cor-texto-secundario: var(--p-neutro-700);
+  --cor-texto-terciario: var(--p-neutro-600);
+  --cor-texto-alerta: #b02a2a;               /* valor > 0 que pede atenção, registro inválido */
+  --cor-selecao: var(--marca-destaque-suave);
+  --cor-interativa: var(--marca-primaria);
+  --cor-foco: var(--marca-primaria);
+
+  /* ---------- 2. Semânticos: status da saída programada (FIXOS, não temáveis) */
+  /* preenchimento | texto sobre o preenchimento | variante para texto sobre branco */
+  --status-no-horario: #0ca30c;        --status-no-horario-sobre: #0b0b0b;    --status-no-horario-texto: #0a890a;
+  --status-atrasada: #fab219;          --status-atrasada-sobre: #0b0b0b;      --status-atrasada-texto: #9f6d03;
+  --status-antecipada: #ec835a;        --status-antecipada-sobre: #0b0b0b;    --status-antecipada-texto: #cd4b18;
+  --status-quase-completa: #3f7fb5;    --status-quase-completa-sobre: #0b0b0b; --status-quase-completa-texto: #3d7baf;
+  --status-saiu-nao-completou: #8f2a2a; --status-saiu-nao-completou-sobre: #ffffff; --status-saiu-nao-completou-texto: #8f2a2a;
+  --status-nao-realizada: #d03b3b;     --status-nao-realizada-sobre: #ffffff; --status-nao-realizada-texto: #d03b3b;
+  --status-inconclusiva: #9a998f;      --status-inconclusiva-sobre: #0b0b0b;  --status-inconclusiva-texto: #78776c;
+  --status-programacao-invalida: #d6d5cf; --status-programacao-invalida-sobre: #0b0b0b;
+  --status-fora-do-periodo: #ecebe6;   --status-fora-do-periodo-sobre: #0b0b0b;
+
+  /* ---------- 2. Semânticos: status da viagem reconstruída (FIXOS) */
+  --viagem-confirmada: #0ca30c;
+  --viagem-provavel: #7cc97c;
+  --viagem-parcial: #8f2a2a;
+  --viagem-inconclusiva: #9a998f;
+
+  /* ---------- 2. Semânticos: dados (FIXOS) */
+  --dado-sentido-0: #2a78d6;
+  --dado-sentido-1: #eb6834;
+  --dado-sentido-circular: var(--p-neutro-700);
+  --dado-serie-unica: #3b6ea5;          /* barras/linhas de série única (IPP diário, histogramas) */
+  --dado-meta: var(--p-neutro-950);     /* linha de referência (ex.: SPTrans 97%), tracejada */
+  --dado-sem-dado: var(--p-neutro-200); /* período com registros sem evento / lacuna neutra */
+  --dado-lacuna-gps: #d03b3b;           /* lacuna de GPS > 10 min, registros descartados */
+  --dado-cursor-tempo: var(--p-neutro-950);  /* proposta: era #d03b3b, colidia com "não realizada" */
+  --dado-fora-de-foco: #8a897f;         /* veículos/traçados não destacados (só elemento gráfico) */
+  --dado-parada: var(--p-neutro-700);
+  --dado-terminal: var(--p-neutro-950);
+  /* veículos destacados, na ordem de uso (categórica, 8 cores) */
+  --dado-cat-1: #2a78d6;
+  --dado-cat-2: #eb6834;
+  --dado-cat-3: #1baf7a;
+  --dado-cat-4: #eda100;
+  --dado-cat-5: #7d4fd6;
+  --dado-cat-6: #d6457a;
+  --dado-cat-7: #4f8a10;
+  --dado-cat-8: #00838f;
+
+  /* ---------- 2. Tipografia */
+  --fonte-sans: var(--marca-fonte);
+  --fonte-mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
+  --fonte-12: 0.75rem;   /* legenda de eixo, subtítulo de card, rodapé */
+  --fonte-13: 0.8125rem; /* tabelas, ids em mono */
+  --fonte-14: 0.875rem;  /* corpo de painel, rótulo de card, legenda */
+  --fonte-16: 1rem;      /* corpo de texto */
+  --fonte-20: 1.25rem;   /* título de seção (h3) */
+  --fonte-24: 1.5rem;    /* título de página (h2) / número de card de status */
+  --fonte-30: 1.875rem;  /* número do card de indicador (KPI) */
+  --peso-normal: 400;
+  --peso-forte: 600;
+  --altura-linha: 1.45;
+  --altura-linha-numero: 1.1;
+  --rotulo-secao-espacamento: 0.04em;  /* rótulo de seção em caixa alta */
+
+  /* ---------- 2. Espaço, raio e borda (base 4 px) */
+  --esp-1: 4px;
+  --esp-2: 8px;
+  --esp-3: 12px;
+  --esp-4: 16px;
+  --esp-6: 24px;
+  --esp-8: 32px;
+  --raio-amostra: 2px;  /* quadradinho de cor da legenda */
+  --raio-controle: 4px; /* inputs, filtros, badges */
+  --raio-tabela: 6px;
+  --raio-card: 8px;
+  --borda: 1px solid var(--cor-borda);
+}
+
+/* Exemplo de tema de cliente: só a camada --marca-* muda.
+   Crie um arquivo por cliente em design-tokens/temas/<cliente>.css e ative com
+   <html data-tema="<cliente>">. */
+[data-tema="exemplo"] {
+  --marca-nome: "Painel Exemplo";
+  --marca-primaria: #5b2a86;
+  --marca-primaria-hover: #46206a;
+  --marca-sobre-primaria: #ffffff;
+  --marca-destaque-suave: #efe7f6;
+}
+
+/* Números sempre tabulares: colunas alinham e KPIs não "pulam" ao atualizar */
+.num,
+table td.n,
+.kpi-valor {
+  font-variant-numeric: tabular-nums;
+}
