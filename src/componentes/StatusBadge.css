@@ -1,0 +1,9 @@
+.status-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: var(--raio-controle);
+  font-size: var(--fonte-12);
+  font-weight: var(--peso-forte);
+  line-height: var(--altura-linha);
+  white-space: nowrap;
+}

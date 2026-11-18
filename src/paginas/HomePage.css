@@ -1,0 +1,22 @@
+.home {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--esp-8) var(--esp-4);
+}
+
+.home__titulo {
+  margin: 0 0 var(--esp-2);
+  font-size: var(--fonte-24);
+  font-weight: var(--peso-forte);
+}
+
+.home__texto {
+  margin: 0 0 var(--esp-4);
+  color: var(--cor-texto-secundario);
+}
+
+.home__api {
+  margin: 0;
+  font-size: var(--fonte-14);
+  color: var(--cor-texto-terciario);
+}
