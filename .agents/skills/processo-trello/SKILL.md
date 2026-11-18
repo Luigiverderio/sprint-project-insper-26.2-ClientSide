@@ -13,7 +13,7 @@ Product Backlog → Sprint Backlog → To - Do → Doing (WIP 4) → Revision (W
 O WIP não está configurado no Trello: conte os cards antes de mover. Coluna cheia → não mova; reporte o gargalo.
 
 ## Card de tarefa
-- Título: `US<nn> – <verbo + tarefa>` (ex.: `US01 – Criar token da API Olho Vivo`). `US<nn>` é a história do documento de requisitos (US01–US32); `US00` = setup do projeto, sem história. Liga card, branch (`feat/us01-...`) e commit (`Refs: US01`).
+- Título: `<id> – <descrição>`. `H<nn>` = história do documento de requisitos (H1–H32, ex.: `H22 – Mapa ao vivo dos ônibus`); `T<nn>` = tarefa técnica sem história (ex.: `T2 – Repositório do frontend com projeto React e testes`). O id liga card, branch (`feat/h22-...`) e commit (`Refs: H22`).
 - Responsável: membro do card.
 - Etiquetas, uma de cada grupo:
   - tamanho: `P` (≤2h) · `M` (meio dia) · `G` (≥1 dia → quebrar em cards menores);
@@ -21,11 +21,12 @@ O WIP não está configurado no Trello: conte os cards antes de mover. Coluna ch
   - prioridade: `ALTA` · `MÉDIA` · `BAIXA`.
 - Datas planejadas (opcional): início e entrega nos campos de data do card, definidos por quem planeja (ex.: PO).
 - Datas reais (criada/iniciada/pronta) vêm do histórico do card (criação e movimentos); não as registre à mão.
-- Card sem `US<nn>`, responsável ou etiquetas não sai de To - Do.
+- Card sem id (`H<nn>`/`T<nn>`), responsável ou etiquetas não sai de To - Do.
 
 ## Movimentos
 - Responsável: To - Do → Doing ao começar; Doing → Revision quando a branch está pronta para revisão.
-- Revisor (um colega): Revision → Done após o merge na `develop` com testes e lint verdes e o critério de aceite atendido.
+- O merge na `develop` pode vir antes da revisão (quando o humano pedir); o card continua em Revision.
+- Revisor (um colega): Revision → Done após revisar, com o merge na `develop` verde e o critério de aceite atendido.
 
 ## Agentes
 - Com acesso ao Trello: atualize só o card da tarefa atual. Sem acesso: diga ao humano o que mover.
