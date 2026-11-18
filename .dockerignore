@@ -1,0 +1,14 @@
+# Nunca enviar segredos nem artefatos locais para o build.
+.env
+.env.*
+!.env.example
+.git
+node_modules
+dist
+dist-ssr
+coverage
+*.log
+.claude
+.agents
+.vscode
+.idea
