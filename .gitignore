@@ -1,0 +1,11 @@
+node_modules/
+dist/
+build/
+coverage/
+
+.env
+/.env
+.env.local
+# Configurações pessoais de agentes (não versionar)
+CLAUDE.local.md
+.claude/settings.local.json
